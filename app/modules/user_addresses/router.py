@@ -27,10 +27,10 @@ def get_user_addresses(db: Session = Depends(get_db)):
         
     return responses.JSONResponse(content=list_row)
 
-@router.get('/{profile_id}')
-def get_user_profile_by_id(profile_id:int, db: Session = Depends(get_db)):
+@router.get('/{address_id}')
+def get_user_address_by_id(address_id:int, db: Session = Depends(get_db)):
     
-    row = db.get(User_address, profile_id)
+    row = db.get(User_address, address_id)
     
     row_d = {
                 "id": row.id,
