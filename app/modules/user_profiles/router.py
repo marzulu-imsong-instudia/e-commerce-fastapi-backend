@@ -4,7 +4,7 @@ from app.core.database import get_db
 from sqlalchemy import select
 from app.modules.user_profiles.modules import User_profile
 
-router = APIRouter(prefix="/user-profile", tags=["Users"])
+router = APIRouter(prefix="/user-profiles", tags=["Users"])
 
 @router.get('/')
 def get_user_profiles(db: Session = Depends(get_db)):
