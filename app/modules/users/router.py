@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, responses
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from sqlalchemy import select
-from app.modules.users.models import User
+from app.modules.users.models import User, User_Json
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -33,6 +33,18 @@ def get_user_by_id(user_id:int, db: Session = Depends(get_db)):
     }
     
     return responses.JSONResponse(content=row)
+
+@router.post('/add/')
+def create_user(user: User_Json, db: Session = Depends(get_db)):
+    try:
+        row = User(
+            email = user.email
+        )
+        db.add(row)
+        db.commit()
+    except:
+        raise HTTPException(status_code=403, detail="Forbbiden")
+    return user
 # @router.post("/", response_model=schemas.UserOut, status_code=status.HTTP_201_CREATED)
 # def create_user(payload: schemas.UserCreate, db: Session = Depends(get_db)):
 #     existing_user = service.get_user_by_email(db, payload.email)
