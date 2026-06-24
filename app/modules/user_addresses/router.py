@@ -55,5 +55,5 @@ def create_user_profile(user_address: User_address_Json,
         db.add(row)
         db.commit()
     except:
-        raise HTTPException(detail=403, detail="Forbidden")
+        raise HTTPException(status_code=403, detail="Forbidden")
     return user_address

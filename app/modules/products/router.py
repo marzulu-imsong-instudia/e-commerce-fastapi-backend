@@ -54,7 +54,7 @@ def create_user_profile(product: Product_Json,
         db.add(row)
         db.commit()
     except:
-        raise HTTPException(detail=403, detail="Forbidden")
+        raise HTTPException(status_code=403, detail="Forbidden")
     return product
 
 # Separation of concerns
