@@ -32,6 +32,7 @@ def get_product_by_id(product_id: int, db: Session = Depends(get_db)):
     # row = select_one(Product, product_id)
     
     row_d = {
+        "status": True,
             "id": row.id,
             "name": row.name,
             "price": row.price,
