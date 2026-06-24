@@ -9,7 +9,9 @@ router = APIRouter(prefix="/products", tags=["Users"])
 @router.get('/')
 def get_products(db: Session = Depends(get_db)):
     query = select(Product)
+    
     res = db.scalars(query).all()
+    # res = select_all(Product)
     
     list_row = []
     for row in res:
@@ -27,6 +29,7 @@ def get_products(db: Session = Depends(get_db)):
 def get_product_by_id(product_id: int, db: Session = Depends(get_db)):
     
     row = db.get(Product, product_id)
+    # row = select_one(Product, product_id)
     
     row_d = {
             "id": row.id,
@@ -37,3 +40,10 @@ def get_product_by_id(product_id: int, db: Session = Depends(get_db)):
             }
     
     return responses.JSONResponse(content=row_d)
+
+
+
+# Separation of concerns
+# Handlers -> Routes | JSON parse | Serialize | validate | Pass to Services | Send as response
+# Services -> Caching | SMS Service | Pass to Repository | Return to Handlers
+# Repository -> Db Interactions | Return to service

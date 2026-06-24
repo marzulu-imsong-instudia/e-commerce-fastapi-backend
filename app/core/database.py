@@ -1,5 +1,6 @@
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker
+from fastapi import Depends
+from sqlalchemy import create_engine, text, select
+from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import DeclarativeBase
 
@@ -29,7 +30,8 @@ def get_db():
         raise
     finally:
         db.close()
-        
+
+
 class Base(DeclarativeBase):
     pass
 
