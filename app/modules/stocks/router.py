@@ -39,14 +39,14 @@ def get_stock_by_id(stock_id: int, db: Session = Depends(get_db)):
 @router.post('/add/')
 def create_user_profile(stock: Stock_Json,
                         db: Session = Depends(get_db)):
-    try:
-        row = Stock(
-            color_variant = stock.color_variant,
-            size_variant = stock.size_variant,
-            quantity = stock.quantity
-        )
-        db.add(row)
-        db.commit()
-    except:
-        raise HTTPException(status_code=403, detail="Forbidden")
+    # try:
+    row = Stock(
+        color_variant = stock.color_variant,
+        size_variant = stock.size_variant,
+        quantity = stock.quantity
+    )
+    db.add(row)
+    db.commit()
+    # except:
+        # raise HTTPException(status_code=403, detail="Forbidden")
     return stock

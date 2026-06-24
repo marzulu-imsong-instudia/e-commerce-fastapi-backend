@@ -19,7 +19,7 @@ class Product(Base):
     
 class Product_Json(BaseModel):
     
-    id: int
+
     name: str
     price: int
     stock_id: int

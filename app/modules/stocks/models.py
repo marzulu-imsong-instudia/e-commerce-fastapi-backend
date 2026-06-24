@@ -13,7 +13,6 @@ class Stock(Base):
 
 class Stock_Json(BaseModel):
     
-    id: int
     color_variant: str
     size_variant: str
     quantity: int

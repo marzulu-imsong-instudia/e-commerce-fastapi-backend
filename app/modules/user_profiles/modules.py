@@ -14,7 +14,6 @@ class User_profile(Base):
     
 class User_profile_Json(BaseModel):
     
-    id: int
     user_id: int
     first_name: str
     last_name: str
