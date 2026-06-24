@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Depends, responses
+from fastapi import APIRouter, Depends, responses, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from sqlalchemy import select
-from app.modules.user_profiles.modules import User_profile
+from app.modules.user_profiles.modules import User_profile, User_profile_Json
 
 router = APIRouter(prefix="/user-profiles", tags=["Users"])
 
@@ -39,3 +39,18 @@ def get_user_profile_by_id(profile_id:int, db: Session = Depends(get_db)):
             }
     
     return responses.JSONResponse(content=row_d)
+
+@router.post('/add/')
+def create_user_profile(user_profile: User_profile_Json,
+                        db: Session = Depends(get_db)):
+    try:
+        row = User_profile(
+            user_id = user_profile.user_id,
+            first_name = user_profile.first_name,
+            last_name = user_profile.last_name
+        )
+        db.add(row)
+        db.commit()
+    except:
+        raise HTTPException(detail=403, detail="Forbidden")
+    return user_profile
