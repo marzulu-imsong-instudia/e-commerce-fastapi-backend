@@ -10,7 +10,11 @@ DATABASE_URL = "postgresql+psycopg2://postgres:postgres@localhost:5432/ecommerce
 engine = create_engine(DATABASE_URL)
 
 # 2. Configure session builder
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = sessionmaker(
+    autocommit=False, 
+    autoflush=False, 
+    bind=engine
+)
 
 # 3. Quick startup check
 try:
